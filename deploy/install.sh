@@ -4,15 +4,15 @@
 
 set -e
 
-GATEWAY_DIR="/home/ubuntu/gateway"
-SERVICE_NAME="gateway"
+GATEWAY_DIR="/home/ubuntu/gateway/price-oracle"
+SERVICE_NAME="price-oracle-gateway"
 
-echo "=== Gateway 部署脚本 ==="
+echo "=== Price Oracle Gateway 部署脚本 ==="
 echo ""
 
 # 检查是否在正确的目录
-if [ ! -f "$GATEWAY_DIR/gateway" ]; then
-    echo "错误：找不到 gateway 二进制文件"
+if [ ! -f "$GATEWAY_DIR/price-oracle-gateway" ]; then
+    echo "错误：找不到 price-oracle-gateway 二进制文件"
     echo "请确保在正确的目录中运行此脚本"
     exit 1
 fi
@@ -29,7 +29,7 @@ fi
 # 安装 systemd 服务
 echo ""
 echo "2. 安装 systemd 服务..."
-sudo cp $GATEWAY_DIR/gateway.service /etc/systemd/system/
+sudo cp $GATEWAY_DIR/deploy/$SERVICE_NAME.service /etc/systemd/system/
 sudo systemctl daemon-reload
 echo "   服务已安装"
 

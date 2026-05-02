@@ -33,7 +33,7 @@ fi
 # 复制配置文件
 echo ""
 echo "安装配置文件..."
-sudo cp /home/ubuntu/gateway/$CONFIG_FILE "$NGINX_AVAILABLE"
+sudo cp /home/ubuntu/gateway/price-oracle/$CONFIG_FILE "$NGINX_AVAILABLE"
 echo "✓ 配置文件已复制到 $NGINX_AVAILABLE"
 
 # 创建软链接

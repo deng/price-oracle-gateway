@@ -7,7 +7,7 @@ set -e
 
 DOMAIN="cryptoprice.bithub.pro"
 NGINX_CONF="nginx-cryptoprice-http.conf"
-GATEWAY_DIR="/home/ubuntu/gateway"
+GATEWAY_DIR="/home/ubuntu/gateway/price-oracle"
 
 echo "=== Nginx 快速配置部署（仅 HTTP）==="
 echo "域名: $DOMAIN"

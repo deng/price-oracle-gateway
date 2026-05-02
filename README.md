@@ -1,4 +1,4 @@
-# Gateway - 加密货币价格网关服务
+# Price Oracle Gateway
 
 一个使用 Rust 和 Axum 构建的高性能加密货币价格查询网关服务。
 

@@ -1,0 +1,18 @@
+[Unit]
+Description=Price Oracle Gateway Service
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/gateway/price-oracle
+ExecStart=/home/ubuntu/gateway/price-oracle/price-oracle-gateway
+Restart=always
+RestartSec=5
+Environment=RUST_LOG=info
+
+# 从 .env 文件加载环境变量
+EnvironmentFile=/home/ubuntu/gateway/price-oracle/.env
+
+[Install]
+WantedBy=multi-user.target

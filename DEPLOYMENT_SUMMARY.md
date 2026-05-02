@@ -1,10 +1,10 @@
-# Gateway 部署摘要
+# Price Oracle Gateway 部署摘要
 
 ## 部署信息
 - **编译日期**: 2025年10月1日
 - **目标平台**: Linux x86_64 (Ubuntu)
 - **服务器地址**: ubuntu@43.156.92.191
-- **部署目录**: /home/ubuntu/gateway
+- **部署目录**: /home/ubuntu/gateway/price-oracle
 - **服务端口**: 13012
 
 ## 部署状态
@@ -24,14 +24,14 @@
 ssh -i /Users/dengzhizhong/.ssh/id_rsa ubuntu@43.156.92.191
 
 # 服务管理
-sudo systemctl status gateway    # 查看状态
-sudo systemctl restart gateway   # 重启服务
-sudo systemctl stop gateway      # 停止服务
-sudo systemctl start gateway     # 启动服务
+sudo systemctl status price-oracle-gateway    # 查看状态
+sudo systemctl restart price-oracle-gateway   # 重启服务
+sudo systemctl stop price-oracle-gateway      # 停止服务
+sudo systemctl start price-oracle-gateway     # 启动服务
 
 # 查看日志
-sudo journalctl -u gateway -f    # 实时日志
-sudo journalctl -u gateway -n 100  # 最近100条日志
+sudo journalctl -u price-oracle-gateway -f    # 实时日志
+sudo journalctl -u price-oracle-gateway -n 100  # 最近100条日志
 
 # 查看端口占用
 sudo lsof -i :13012
@@ -80,16 +80,18 @@ curl 'http://43.156.92.191:13012/api/v1/price?symbol=BTCUSDT'
 
 ## 部署的文件
 ```
-/home/ubuntu/gateway/
-├── gateway              # 二进制可执行文件（15MB）
-├── config/              # 配置文件目录
+/home/ubuntu/gateway/price-oracle/
+├── price-oracle-gateway  # 二进制可执行文件（15MB）
+├── config/               # 配置文件目录
 │   └── default.toml
-├── .env                 # 环境变量配置
-├── .env.example         # 环境变量示例
-├── gateway.service      # systemd 服务配置
-├── start.sh             # 启动脚本
-├── install.sh           # 安装脚本
-└── README.md           # 部署文档
+├── .env                  # 环境变量配置
+├── .env.example          # 环境变量示例
+├── deploy/
+│   ├── gateway.service   # systemd 服务配置
+│   ├── start.sh          # 启动脚本
+│   ├── install.sh        # 安装脚本
+│   └── ...
+└── README.md            # 部署文档
 ```
 
 ## 注意事项
@@ -117,21 +119,21 @@ sudo iptables-save
 cross build --release --target x86_64-unknown-linux-gnu
 
 # 停止远程服务
-ssh -i /Users/dengzhizhong/.ssh/id_rsa ubuntu@43.156.92.191 "sudo systemctl stop gateway"
+ssh -i /Users/dengzhizhong/.ssh/id_rsa ubuntu@43.156.92.191 "sudo systemctl stop price-oracle-gateway"
 
 # 上传新的二进制文件
-scp -i /Users/dengzhizhong/.ssh/id_rsa target/x86_64-unknown-linux-gnu/release/gateway ubuntu@43.156.92.191:/home/ubuntu/gateway/
+scp -i /Users/dengzhizhong/.ssh/id_rsa target/x86_64-unknown-linux-gnu/release/price-oracle-gateway ubuntu@43.156.92.191:/home/ubuntu/gateway/price-oracle/
 
 # 重启服务
-ssh -i /Users/dengzhizhong/.ssh/id_rsa ubuntu@43.156.92.191 "sudo systemctl start gateway"
+ssh -i /Users/dengzhizhong/.ssh/id_rsa ubuntu@43.156.92.191 "sudo systemctl start price-oracle-gateway"
 ```
 
 ## 问题排查
 如果服务无法启动，检查：
 1. 端口是否被占用：`sudo lsof -i :13012`
-2. 二进制文件是否有执行权限：`ls -l /home/ubuntu/gateway/gateway`
-3. 环境变量是否正确配置：`cat /home/ubuntu/gateway/.env`
-4. 服务日志：`sudo journalctl -u gateway -n 50`
+2. 二进制文件是否有执行权限：`ls -l /home/ubuntu/gateway/price-oracle/price-oracle-gateway`
+3. 环境变量是否正确配置：`cat /home/ubuntu/gateway/price-oracle/.env`
+4. 服务日志：`sudo journalctl -u price-oracle-gateway -n 50`
 
 ## 编译说明
 本次编译使用了以下特性：

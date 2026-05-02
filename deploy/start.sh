@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Gateway 启动脚本
+# Price Oracle Gateway 启动脚本
 
 # 设置日志级别
 export RUST_LOG=${RUST_LOG:-info}
@@ -15,5 +15,5 @@ if [ -f .env ]; then
 fi
 
 # 启动服务
-echo "Starting gateway service..."
-./gateway
+echo "Starting price-oracle-gateway service..."
+./price-oracle-gateway
