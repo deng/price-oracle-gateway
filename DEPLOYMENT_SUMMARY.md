@@ -87,7 +87,7 @@ curl 'http://43.156.92.191:13012/api/v1/price?symbol=BTCUSDT'
 ├── .env                  # 环境变量配置
 ├── .env.example          # 环境变量示例
 ├── deploy/
-│   ├── gateway.service   # systemd 服务配置
+│   ├── price-oracle-gateway.service   # systemd 服务配置
 │   ├── start.sh          # 启动脚本
 │   ├── install.sh        # 安装脚本
 │   └── ...
